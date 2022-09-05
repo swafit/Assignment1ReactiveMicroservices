@@ -1,3 +1,4 @@
 include 'book-service'
-include 'LibraryService'
+include 'library-service'
 include 'api-gateway'
+include 'employee-service'
