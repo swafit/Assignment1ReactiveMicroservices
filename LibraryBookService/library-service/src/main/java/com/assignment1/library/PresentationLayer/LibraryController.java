@@ -2,8 +2,11 @@ package com.assignment1.library.PresentationLayer;
 
 import com.assignment1.library.ServiceLayer.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.assignment1.library.ServiceLayer.LibraryDTO;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("library")
@@ -12,30 +15,28 @@ public class LibraryController {
     private LibraryService libraryService;
 
     @GetMapping()
-    public Flux<libraryDTO> getAllLibraries(){
+    public Flux<LibraryDTO> getAllLibraries(){
         return libraryService.getAll();
     }
     @PostMapping()
     public Mono<LibraryDTO> insertLibrary(@RequestBody Mono<LibraryDTO> libraryDTOMono){
-        return libraryService.insertLibary(libraryDTOMono);
+        return libraryService.insertLibrary(libraryDTOMono);
     }
-    @PostMapping("{libraryUUIDString}")
+    @PutMapping("{libraryUUIDString}")
     public Mono<ResponseEntity<LibraryDTO>> updateLibraryByLibraryUUIDString(@PathVariable String libraryUUIDString,
                                                                              @RequestBody Mono<LibraryDTO> libraryDTOMono){
-        return productService.updateProduct(libraryUUIDString, libraryDTOMono)
+        return libraryService.updateLibrary(libraryUUIDString, libraryDTOMono)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
-    @GetMapping("{productUUIDString}")
-    public Mono<ResponseEntity<ProductDTO>> getProductByProductUUID(@PathVariable String productUUIDString){
-        return productService.getProductByProductUUIDString(productUUIDString)
+    @GetMapping("{libraryUUIDString}")
+    public Mono<ResponseEntity<LibraryDTO>> getProductByProductUUID(@PathVariable String libraryUUIDString){
+        return libraryService.getLibraryByLibraryUUIDString(libraryUUIDString)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
-    @DeleteMapping("{productUUIDString}")
-    public Mono<Void> deleteProductByProductUUID(@PathVariable String productUUIDString){
-        return productService.deleteProductByProductUUID(productUUIDString);
+    @DeleteMapping("{libraryUUIDString}")
+    public Mono<Void> deleteProductByProductUUID(@PathVariable String libraryUUIDString){
+        return libraryService.deleteLibrary(libraryUUIDString);
     }
-}
-
 }

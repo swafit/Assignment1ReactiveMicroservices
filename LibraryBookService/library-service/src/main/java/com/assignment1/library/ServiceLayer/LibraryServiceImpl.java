@@ -4,7 +4,6 @@ package com.assignment1.library.ServiceLayer;
 import com.assignment1.library.DataAccessLayer.LibraryRepository;
 import com.assignment1.library.Util.EntityDtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.assignment1.library.DataAccessLayer.*;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,7 +26,7 @@ public class LibraryServiceImpl implements LibraryService{
             .map(EntityDtoUtil::toEntity)
             .doOnNext(e -> e.setLibraryUUID(EntityDtoUtil.generateUUIDString()))
             .flatMap(repository::insert)
-            .map(EntityDtoUtil::toDTO);
+            .map(EntityDtoUtil::toDto);
     }
 
     @Override
@@ -39,19 +38,21 @@ public class LibraryServiceImpl implements LibraryService{
                             .doOnNext(e -> e.setId(p.getId()))
                     )
                     .flatMap(repository::save)
-                    .map(EntityDtoUtil::toDTO);
+                    .map(EntityDtoUtil::toDto);
 
         }
 
         @Override
         public Mono<LibraryDTO> getLibraryByLibraryUUIDString(String libraryUUIDString) {
             return repository.findLibraryByLibraryUUID(libraryUUIDString)
-                    .map(EntityDtoUtil::toDTO);
+                    .map(EntityDtoUtil::toDto);
         }
 
         @Override
-        public Mono<Void> deleteLibraryByLibraryUUID(String libraryUUIDString) {
+        public Mono<Void> deleteLibrary(String libraryUUIDString) {
+
             return repository.deleteLibraryByLibraryUUID(libraryUUIDString);
+
         }
 
 }

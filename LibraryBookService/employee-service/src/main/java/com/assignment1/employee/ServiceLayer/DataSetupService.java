@@ -1,27 +1,25 @@
 package com.assignment1.employee.ServiceLayer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
-public class DataSetupService implements CmmandLineRunner{
+public class DataSetupService implements CommandLineRunner{
 @Autowired
     private EmployeeService employeeService;
 
     @Override
     public void run(String... args) throws Exception {
 
-        EmployeeDTO p1 = new EmployeeDTO("4k-tv",1000);
-        EmployeeDTO p2 = new EmployeeDTO("Graphics card",3000);
-        EmployeeDTO p3 = new EmployeeDTO("I7 processor",500);
-        EmployeeDTO p4 = new EmployeeDTO("HyperX headset",150);
-        EmployeeDTO p5 = new EmployeeDTO("Monitor",350);
+        EmployeeDTO e1 = new EmployeeDTO("John Doe","Librarian");
 
-        Flux.just(p1,p2,p3,p4,p5)
-                .flatMap(p -> productService.insertProduct(Mono.just(p))
-                    .log(p1.toString()))
-                .subscribe();
+        Flux.just(e1)
+                        .flatMap(e -> employeeService.insertEmployee(Mono.just(e))
+                            .log(e1.toString()))
+                        .subscribe();
 
     }
-}
-
 }

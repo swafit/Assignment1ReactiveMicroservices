@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService{
             .map(EntityDtoUtil::toEntity)
             .doOnNext(e -> e.setBookUUID(EntityDtoUtil.generateUUIDString()))
             .flatMap(repository::insert)
-            .map(EntityDtoUtil::toDTO);
+            .map(EntityDtoUtil::toDto);
     }
 
     @Override
@@ -37,14 +37,14 @@ public class BookServiceImpl implements BookService{
                             .doOnNext(e -> e.setId(p.getId()))
                     )
                     .flatMap(repository::save)
-                    .map(EntityDtoUtil::toDTO);
+                    .map(EntityDtoUtil::toDto);
 
         }
 
         @Override
         public Mono<BookDTO> getBookByBookUUIDString(String bookUUIDString) {
             return repository.findBookByBookUUID(bookUUIDString)
-                    .map(EntityDtoUtil::toDTO);
+                    .map(EntityDtoUtil::toDto);
         }
 
         @Override

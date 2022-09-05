@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class EmployeeRepository extends ReactiveMongoRepository<Product, String>{
-    Mono<Employee> findProductByProductUUID(String productUUIDString);
-    Mono<Void> deleteProductByProductUUID(String productUUIDString);
+public interface EmployeeRepository extends ReactiveMongoRepository<Employee, String>
+{
+    Mono<Employee> findEmployeeByEmployeeUUID(String employeeUUIDString);
+
+    Mono<Void> deleteEmployeeByEmployeeUUID(String employeeUUIDString);
 }

@@ -1,0 +1,40 @@
+server:
+  error:
+    include-message: always
+
+logging:
+  level:
+    root: INFO
+    com.assignment1: DEBUG
+
+app:
+  book-service:
+    host: localhost
+    port: 7001
+  employee-service:
+    host: localhost
+    port: 7002
+  library-service:
+    host: localhost
+    port: 7003
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server.port: 8080
+
+app:
+  productinventory-service:
+    host: book
+    port: 8080
+  order-service:
+    host: employee
+    port: 8080
+  productwarehouselocation-service:
+    host: library
+    port: 8080

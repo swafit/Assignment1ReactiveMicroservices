@@ -1,5 +1,7 @@
 package com.assignment1.employee.ServiceLayer;
 
+import com.assignment1.employee.DataAccessLayer.EmployeeRepository;
+import com.assignment1.employee.Util.EntityDtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -21,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Mono<EmployeeDTO> insertEmployee(Mono<EmployeeDTO> employeeDTOMono) {
         return employeeDTOMono
                 .map(EntityDtoUtil::toEntity)
-                .doOnNext(e-> e.setProductUUID(EntityDtoUtil.generateUUIDString()))
+                .doOnNext(e-> e.setEmployeeUUID(EntityDtoUtil.generateUUIDString()))
                 .flatMap(repository::insert)
                 .map(EntityDtoUtil::toDTO);
     }
