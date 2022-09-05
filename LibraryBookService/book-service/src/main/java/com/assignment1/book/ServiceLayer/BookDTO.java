@@ -1,4 +1,4 @@
-package foo.bar;
+package com.ssignment1.book.ServiceLayer;
 
 import lombok.Data;
 import lombok.ToString;

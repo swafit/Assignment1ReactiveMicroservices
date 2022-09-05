@@ -1,8 +1,13 @@
 package com.assignment1.book.PresentationLayer;
 
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("books")
 public class BookController {
 
+@Autowired
+    private BookService bookService;
 }
