@@ -1,1 +1,3 @@
-rootProject.name = 'LibraryBookService'
+include 'book-service'
+include 'LibraryService'
+include 'api-gateway'
