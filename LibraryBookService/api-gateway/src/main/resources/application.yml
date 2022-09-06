@@ -29,12 +29,12 @@ spring:
 server.port: 8080
 
 app:
-  productinventory-service:
+  book-service:
     host: book
     port: 8080
-  order-service:
+  employee-service:
     host: employee
     port: 8080
-  productwarehouselocation-service:
+  library-service:
     host: library
     port: 8080

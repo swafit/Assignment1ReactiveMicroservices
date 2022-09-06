@@ -1,4 +1,4 @@
-package com.assignment1.employee.ServiceLayer;
+package com.assignment1.apigateway.PresentationLayer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,12 +12,10 @@ public class EmployeeDTO {
     private String employeeUUID;
     private String name;
     private String role;
-    private String libraryUUID;
 
 
-   public EmployeeDTO(String name, String role, String libraryUUID) {
+   public EmployeeDTO(String name, String role) {
             this.name = name;
             this.role = role;
-            this.libraryUUID = libraryUUID;
     }
 }

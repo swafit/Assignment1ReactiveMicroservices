@@ -30,25 +30,36 @@ public class BookServiceImpl implements BookService{
 
     @Override
         public Mono<BookDTO> updateBook(String bookUUIDString, Mono<BookDTO> bookDTOMono) {
+            if(!repository.existsBookByBookId(bookUUIDString)) {
+                System.out.println("NotFoundThrown");
+                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+                }
             return repository.findBookByBookUUID(bookUUIDString)
                     .flatMap(p -> bookDTOMono
                             .map(EntityDtoUtil::toEntity)
                             .doOnNext(e->e.setBookUUID(p.getBookUUID()))
-                            .doOnNext(e -> e.setId(p.getId()))
-                    )
-                    .flatMap(repository::save)
-                    .map(EntityDtoUtil::toDto);
+                            .doOnNext(e -> e.setId(p.getId())))
+                            .flatMap(repository::save)
+                            .map(EntityDtoUtil::toDto);
 
         }
 
         @Override
         public Mono<BookDTO> getBookByBookUUIDString(String bookUUIDString) {
+            if(!repository.existsBookByBookId(bookUUIDString)) {
+                System.out.println("NotFoundThrown");
+                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+                }
             return repository.findBookByBookUUID(bookUUIDString)
                     .map(EntityDtoUtil::toDto);
         }
 
         @Override
         public Mono<Void> deleteBookByBookUUID(String bookUUIDString) {
+            if(!repository.existsBookByBookId(bookUUIDString)) {
+                System.out.println("NotFoundThrown");
+                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+                }
             return repository.deleteBookByBookUUID(bookUUIDString);
         }
     }

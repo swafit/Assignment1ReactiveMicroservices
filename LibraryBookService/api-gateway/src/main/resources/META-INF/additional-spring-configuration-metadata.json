@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "app.book-service.host",
+      "type": "java.lang.String",
+      "description": "Description for app.book-service.host."
+  }
+] }

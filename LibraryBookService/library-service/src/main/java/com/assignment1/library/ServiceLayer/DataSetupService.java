@@ -9,24 +9,24 @@ import reactor.core.publisher.Mono;
 @Service
 public class DataSetupService implements CommandLineRunner{
 
-@Autowired
+    @Autowired
     private LibraryService libraryService;
 
     @Override
     public void run(String... args) throws Exception {
 
-        LibraryDTO p1 = new LibraryDTO("Cloud Library", "123", "Mason Street", "Brossard");
-        LibraryDTO p2 = new LibraryDTO("Cloud Library", "567", "Mason Street", "Brossard");
-        LibraryDTO p3 = new LibraryDTO("Cloud Library", "3537", "Mason Street", "Brossard");
-        LibraryDTO p4 = new LibraryDTO("Cloud Library", "3258", "Mason Street", "Brossard");
-        LibraryDTO p5 = new LibraryDTO("Cloud Library", "9742", "Mason Street", "Brossard");
+        LibraryDTO l1 = new LibraryDTO("Cloud Library", "123", "Mason Street", "Brossard");
+        LibraryDTO l2 = new LibraryDTO("Cash Library", "567", "5th Avenue", "New York");
+        LibraryDTO l3 = new LibraryDTO("Cactus", "3537", "Savana Street", "Somewhere");
+        LibraryDTO l4 = new LibraryDTO("Electric Library", "3258", "Wire Street", "Electric Pole");
+        LibraryDTO l5 = new LibraryDTO("Cloud Library", "9742", "Mason Street", "Brossard");
 
-        Flux.just(p1,p2,p3,p4,p5)
-                .flatMap(p -> libraryService.insertLibrary(Mono.just(p))
-                    .log(p1.toString()))
+        Flux.just(l1,l2,l3,l4,l5)
+                .flatMap(l -> libraryService.insertLibrary(Mono.just(l))
+                    .log(l1.toString()))
                 .subscribe();
 
     }
 }
 
-}
+

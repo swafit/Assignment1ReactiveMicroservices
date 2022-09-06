@@ -1,11 +1,12 @@
 package com.assignment1.employee.ServiceLayer;
 
+import com.assignment1.employee.Util.NotFoundException;
 import com.assignment1.employee.DataAccessLayer.EmployeeRepository;
 import com.assignment1.employee.Util.EntityDtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -30,6 +31,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Mono<EmployeeDTO> updateEmployee(String employeeUUIDString, Mono<EmployeeDTO> employeeDTOMono) {
+        if(!repository.existsEmployeeByEmployeeId(employeeUUIDString)) {
+                    System.out.println("NotFoundThrown");
+                    throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
+                    }
         return repository.findEmployeeByEmployeeUUID(employeeUUIDString)
                 .flatMap(p -> employeeDTOMono
                         .map(EntityDtoUtil::toEntity)
@@ -40,15 +45,29 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .map(EntityDtoUtil::toDTO);
 
     }
+    @Override
+    public Mono<EmployeeDTO> getEmployeeByLibraryUUIDString(String libraryUUIDString) {
+        if(!repository.existsEmployeeByLibraryUUID(libraryUUIDString)) {
+            System.out.println("NotFoundThrown");
+            throw new NotFoundException("Unknown LibraryUUID provided: " + libraryUUIDString);
+            }
+            return repository.findEmployeeByLibraryUUID(libraryUUIDString)
+             .map(EntityDtoUtil::toDTO);
+        }
 
     @Override
     public Mono<EmployeeDTO> getEmployeeByEmployeeUUIDString(String employeeUUIDString) {
+            if(!repository.existsEmployeeByEmployeeId(employeeUUIDString)) {
+                        System.out.println("NotFoundThrown");
+                        throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
+                        }
         return repository.findEmployeeByEmployeeUUID(employeeUUIDString)
-                .map(EntityDtoUtil::toDTO);
+         .map(EntityDtoUtil::toDTO);
     }
 
     @Override
     public Mono<Void> deleteEmployeeByEmployeeUUID(String employeeUUIDString) {
+
         return repository.deleteEmployeeByEmployeeUUID(employeeUUIDString);
     }
 }

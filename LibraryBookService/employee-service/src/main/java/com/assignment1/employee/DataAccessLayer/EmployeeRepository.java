@@ -8,6 +8,9 @@ import reactor.core.publisher.Mono;
 public interface EmployeeRepository extends ReactiveMongoRepository<Employee, String>
 {
     Mono<Employee> findEmployeeByEmployeeUUID(String employeeUUIDString);
-
     Mono<Void> deleteEmployeeByEmployeeUUID(String employeeUUIDString);
+    boolean existsEmployeeByEmployeeId(String employeeUUIDString);
+    boolean existsEmployeeByLibraryUUID(String libraryUUIDString);
+    Mono<Employee> findEmployeeByLibraryUUID(String libraryUUIDString);
+
 }

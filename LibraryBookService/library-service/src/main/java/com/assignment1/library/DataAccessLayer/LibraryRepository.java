@@ -8,7 +8,6 @@ import reactor.core.publisher.Mono;
 public interface LibraryRepository extends ReactiveMongoRepository<Library, String> {
 
     Mono<Library> findLibraryByLibraryUUID(String libraryUUIDString);
-
     Mono<Void> deleteLibraryByLibraryUUID(String libraryUUIDString);
-
+    boolean existsLibraryByLibraryId(String libraryUUIDString);
 }

@@ -12,4 +12,5 @@ public class Employee {
     private String employeeUUID;
     private String name;
     private String role;
+    private String libraryUUID;
 }

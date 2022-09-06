@@ -10,5 +10,6 @@ public interface BookRepository extends ReactiveMongoRepository<Book, String> {
 
     Mono<Book> findBookByBookUUID(String bookUUIDString);
     Mono<Void> deleteBookByBookUUID(String bookUUIDString);
+    boolean existsBookByBookId(String bookUUIDString);
 }
 

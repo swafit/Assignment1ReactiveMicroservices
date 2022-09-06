@@ -9,4 +9,5 @@ public interface EmployeeService {
     Mono<EmployeeDTO> updateEmployee(String employeeUUIDString, Mono<EmployeeDTO> employeeDTOMono);
     Mono<EmployeeDTO> getEmployeeByEmployeeUUIDString(String employeeUUIDString);
     Mono<Void> deleteEmployeeByEmployeeUUID(String employeeUUIDString);
+    Mono<EmployeeDTO> getEmployeeByLibraryUUIDString(String libraryUUIDString);
 }
