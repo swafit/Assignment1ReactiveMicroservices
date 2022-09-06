@@ -65,7 +65,7 @@ services:
       - 8081:8081
     depends_on:
       - mongo
-      - book-service
+      - book
 
 
 
@@ -98,7 +98,7 @@ services:
       - 8081:8081
     depends_on:
       - mongo1
-      - library-service
+      - library
 
 
   mongo2:
@@ -130,4 +130,4 @@ services:
       - 8081:8081
     depends_on:
       - mongo2
-      - employee-service
+      - employee
