@@ -10,18 +10,18 @@ services:
   library:
     build: library-service
     hostname: library-service
-      environment:
-        - SPRING_PROFILES_ACTIVE=docker
-      depends_on:
-        - mongo1
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo1
 
   employee:
       build: employee-service
       hostname: employee-service
-        environment:
-          - SPRING_PROFILES_ACTIVE=docker
-        depends_on:
-          - mongo2
+      environment:
+        - SPRING_PROFILES_ACTIVE=docker
+      depends_on:
+        - mongo2
 
 
   api-gateway:
