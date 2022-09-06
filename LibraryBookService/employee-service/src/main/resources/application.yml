@@ -14,7 +14,7 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 27019
       database: employees
       username: root
       password: password
@@ -28,7 +28,7 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 27019
       database: employees
       username: root
       password: password
@@ -41,7 +41,7 @@ spring:
   data:
     mongodb:
       host: mongo
-      port: 27017
+      port: 27019
       database: employees
       username: root
       password: password
