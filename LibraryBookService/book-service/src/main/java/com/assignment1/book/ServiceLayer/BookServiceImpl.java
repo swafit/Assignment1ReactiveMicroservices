@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
         public Mono<BookDTO> updateBook(String bookUUIDString, Mono<BookDTO> bookDTOMono) {
-            if(!repository.existsBookByBookId(bookUUIDString)) {
+            if(!repository.existsBookByLibraryId(bookUUIDString)) {
                 System.out.println("NotFoundThrown");
                 throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
                 }
@@ -45,18 +45,18 @@ public class BookServiceImpl implements BookService{
         }
 
         @Override
-        public Mono<BookDTO> getBookByBookUUIDString(String bookUUIDString) {
-            if(!repository.existsBookByBookId(bookUUIDString)) {
+        public Flux<BookDTO> getBooksByLibraryId(String libraryId) {
+            if(!repository.existsBookByLibraryId(libraryId)) {
                 System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+                throw new NotFoundException("Unknown BookUUID provided: " + libraryId);
                 }
-            return repository.findBookByBookUUID(bookUUIDString)
+            return repository.findBooksByLibraryId(libraryId)
                     .map(EntityDtoUtil::toDto);
         }
 
         @Override
         public Mono<Void> deleteBookByBookUUID(String bookUUIDString) {
-            if(!repository.existsBookByBookId(bookUUIDString)) {
+            if(!repository.existsBookByLibraryId(bookUUIDString)) {
                 System.out.println("NotFoundThrown");
                 throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
                 }

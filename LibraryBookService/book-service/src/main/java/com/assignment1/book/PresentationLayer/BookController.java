@@ -33,9 +33,9 @@ public class BookController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("{bookUUIDString}")
-    public Mono<ResponseEntity<BookDTO>> getBookByBookUUID(@PathVariable String bookUUIDString){
-        return bookService.getBookByBookUUIDString(bookUUIDString)
+    @GetMapping("{libraryId}")
+    public Flux<ResponseEntity<BookDTO>> getBooksByLibraryID(@PathVariable String libraryId){
+        return bookService.getBooksByLibraryId(libraryId)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }

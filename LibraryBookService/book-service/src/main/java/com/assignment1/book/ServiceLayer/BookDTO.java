@@ -11,12 +11,15 @@ import lombok.ToString;
 public class BookDTO {
 
     private String bookUUID;
+    private String libraryId;
     private String name;
     private String genre;
     private String ISBN;
     private int quantity;
 
-    public BookDTO(String name, String genre, String ISBN, int quantity){
+
+    public BookDTO(String libraryId, String name, String genre, String ISBN, int quantity){
+        this.libraryId = libraryId;
         this.name = name;
         this.genre = genre;
         this.ISBN = ISBN;

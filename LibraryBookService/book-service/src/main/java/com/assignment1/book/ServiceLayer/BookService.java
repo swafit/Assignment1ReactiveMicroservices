@@ -7,7 +7,7 @@ public interface BookService {
         Flux<BookDTO> getAll();
         Mono<BookDTO> insertBook(Mono<BookDTO> bookDTOMono);
             Mono<BookDTO> updateBook(String bookUUIDString, Mono<BookDTO> bookDTOMono);
-            Mono<BookDTO> getBookByBookUUIDString(String bookUUIDString);
+            Flux<BookDTO> getBooksByLibraryId(String libraryId);
             Mono<Void> deleteBookByBookUUID(String bookUUIDString);
         }
 

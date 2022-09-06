@@ -11,7 +11,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface LibraryAggregateMapper {
-    
+    LibraryAggregate DTOToAggregate(Mono<LibraryDTO> responseModelMono, Flux<BookDTO> bookDTOFlux, Flux<EmployeeDTO> employeeDTOFlux);
+    /*
     Mono<LibraryAggregate> DTOToAggregate(Mono<LibraryDTO> responseModelMono, Flux<BookDTO> bookDTOFlux, Flux<EmployeeDTO> employeeDTOFlux);
 
     Mono<LibraryDTO> aggregateToDTO(Mono<LibraryAggregate> aggregate);
@@ -19,4 +20,5 @@ public interface LibraryAggregateMapper {
     Flux<LibraryAggregate> DTOFluxToAggregateFlux(Flux<LibraryDTO> responseModels);
 
     Flux<LibraryDTO> aggregateFluxToDTOFlux(Flux<LibraryAggregate> aggregates);
+*/
 }

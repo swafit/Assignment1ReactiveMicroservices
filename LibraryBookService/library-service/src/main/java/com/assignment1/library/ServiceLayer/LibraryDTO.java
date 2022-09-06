@@ -22,5 +22,11 @@ public class LibraryDTO {
         this.city = city;
     }
 
-
+    public LibraryDTO(String libraryUUID, String name, String streetNumber, String streetName, String city) {
+        this.libraryUUID = libraryUUID;
+        this.name = name;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
+        this.city = city;
+    }
 }
