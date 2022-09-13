@@ -1,6 +1,5 @@
 package com.assignment1.employee.ServiceLayer;
 
-import com.assignment1.employee.Util.NotFoundException;
 import com.assignment1.employee.DataAccessLayer.EmployeeRepository;
 import com.assignment1.employee.Util.EntityDtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Flux<EmployeeDTO> getAll(){
         return repository.findAll()
-                .map(EntityDtoUtil::toDTO);
+                .map(EntityDtoUtil::toDto);
     }
 
     @Override
@@ -26,15 +25,15 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .map(EntityDtoUtil::toEntity)
                 .doOnNext(e-> e.setEmployeeUUID(EntityDtoUtil.generateUUIDString()))
                 .flatMap(repository::insert)
-                .map(EntityDtoUtil::toDTO);
+                .map(EntityDtoUtil::toDto);
     }
 
     @Override
     public Mono<EmployeeDTO> updateEmployee(String employeeUUIDString, Mono<EmployeeDTO> employeeDTOMono) {
-        if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
-                    System.out.println("NotFoundThrown");
-                    throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
-                    }
+//        if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
+//                    System.out.println("NotFoundThrown");
+//                    throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
+//                    }
         return repository.findEmployeeByEmployeeUUID(employeeUUIDString)
                 .flatMap(p -> employeeDTOMono
                         .map(EntityDtoUtil::toEntity)
@@ -42,27 +41,27 @@ public class EmployeeServiceImpl implements EmployeeService{
                         .doOnNext(e -> e.setId(p.getId()))
                 )
                 .flatMap(repository::save)
-                .map(EntityDtoUtil::toDTO);
+                .map(EntityDtoUtil::toDto);
 
     }
     @Override
-    public Mono<EmployeeDTO> getEmployeeByLibraryUUIDString(String libraryUUIDString) {
-        if(!repository.existsEmployeeByLibraryUUID(libraryUUIDString)) {
-            System.out.println("NotFoundThrown");
-            throw new NotFoundException("Unknown LibraryUUID provided: " + libraryUUIDString);
-            }
-            return repository.findEmployeeByLibraryUUID(libraryUUIDString)
-             .map(EntityDtoUtil::toDTO);
+    public Flux<EmployeeDTO> getEmployeesByLibraryUUIDString(String libraryUUIDString) {
+//        if(!repository.existsEmployeeByLibraryUUID(libraryUUIDString)) {
+//            System.out.println("NotFoundThrown");
+//            throw new NotFoundException("Unknown LibraryUUID provided: " + libraryUUIDString);
+//            }
+            return repository.findEmployeesByLibraryUUID(libraryUUIDString)
+             .map(EntityDtoUtil::toDto);
         }
 
     @Override
     public Mono<EmployeeDTO> getEmployeeByEmployeeUUIDString(String employeeUUIDString) {
-            if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
+            /*if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
                         System.out.println("NotFoundThrown");
                         throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
-                        }
+            */
         return repository.findEmployeeByEmployeeUUID(employeeUUIDString)
-         .map(EntityDtoUtil::toDTO);
+         .map(EntityDtoUtil::toDto);
     }
 
     @Override

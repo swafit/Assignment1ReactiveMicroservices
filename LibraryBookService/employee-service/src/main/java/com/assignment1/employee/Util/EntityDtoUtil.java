@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class EntityDtoUtil {
 
-     public static EmployeeDTO toDTO(Employee employee){
+     public static EmployeeDTO toDto(Employee employee){
         EmployeeDTO dto = new EmployeeDTO();
         BeanUtils.copyProperties(employee, dto);
         return dto;

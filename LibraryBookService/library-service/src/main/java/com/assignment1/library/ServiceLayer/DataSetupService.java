@@ -1,6 +1,5 @@
 package com.assignment1.library.ServiceLayer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -9,8 +8,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class DataSetupService implements CommandLineRunner{
 
-    @Autowired
-    private LibraryService libraryService;
+    private final LibraryService libraryService;
+
+    public DataSetupService(LibraryService libraryService) {
+        this.libraryService = libraryService;
+    }
 
     @Override
     public void run(String... args) throws Exception {
