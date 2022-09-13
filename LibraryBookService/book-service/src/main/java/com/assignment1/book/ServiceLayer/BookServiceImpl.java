@@ -2,7 +2,6 @@ package com.assignment1.book.ServiceLayer;
 
 import com.assignment1.book.DataAccessLayer.BookRepository;
 import com.assignment1.book.Util.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -10,8 +9,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class BookServiceImpl implements BookService{
 
-    @Autowired
-    public BookRepository repository;
+    public final BookRepository repository;
+
+    public BookServiceImpl(BookRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Flux<BookDTO> getAll(){

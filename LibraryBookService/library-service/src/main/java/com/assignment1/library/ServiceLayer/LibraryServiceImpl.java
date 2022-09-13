@@ -13,9 +13,7 @@ public class LibraryServiceImpl implements LibraryService{
 
     public final LibraryRepository repository;
 
-    public LibraryServiceImpl(LibraryRepository repository) {
-        this.repository = repository;
-    }
+    public LibraryServiceImpl(LibraryRepository repository) { this.repository = repository; }
 
     @Override
     public Flux<LibraryDTO> getAll(){
@@ -34,10 +32,10 @@ public class LibraryServiceImpl implements LibraryService{
 
     @Override
         public Mono<LibraryDTO> updateLibrary(String libraryUUIDString, Mono<LibraryDTO> libraryDTOMono) {
-            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
-                }
+//            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
+//                }
             return repository.findLibraryByLibraryUUID(libraryUUIDString)
                     .flatMap(p -> libraryDTOMono
                             .map(EntityDtoUtil::toEntity)
@@ -51,20 +49,20 @@ public class LibraryServiceImpl implements LibraryService{
 
         @Override
         public Mono<LibraryDTO> getLibraryByLibraryUUIDString(String libraryUUIDString) {
-            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
-                }
+//            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
+//                }
             return repository.findLibraryByLibraryUUID(libraryUUIDString)
                     .map(EntityDtoUtil::toDto);
         }
 
         @Override
         public Mono<Void> deleteLibrary(String libraryUUIDString) {
-            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
-                }
+//            if(!repository.existsLibraryByLibraryUUID(libraryUUIDString)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + libraryUUIDString);
+//                }
             return repository.deleteLibraryByLibraryUUID(libraryUUIDString);
 
         }

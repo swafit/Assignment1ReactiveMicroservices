@@ -26,16 +26,16 @@ public class LibraryController {
         return libraryService.insertLibrary(libraryDTOMono);
     }
     @PutMapping("{libraryUUIDString}")
-    public Mono<ResponseEntity<LibraryDTO>> updateLibraryByLibraryUUIDString(@PathVariable String libraryUUIDString, @RequestBody Mono<LibraryDTO> libraryDTOMono){
-        return libraryService.updateLibrary(libraryUUIDString, libraryDTOMono)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public Mono</*ResponseEntity<*/LibraryDTO/*>*/> updateLibraryByLibraryUUIDString(@PathVariable String libraryUUIDString, @RequestBody Mono<LibraryDTO> libraryDTOMono){
+        return libraryService.updateLibrary(libraryUUIDString, libraryDTOMono)/* // */ ;
+//                .map(ResponseEntity::ok)
+//                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     @GetMapping("{libraryUUIDString}")
-    public Mono<ResponseEntity<LibraryDTO>> getProductByProductUUID(@PathVariable String libraryUUIDString){
-        return libraryService.getLibraryByLibraryUUIDString(libraryUUIDString)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public Mono</*ResponseEntity<*/LibraryDTO/*>*/> getProductByProductUUID(@PathVariable String libraryUUIDString){
+        return libraryService.getLibraryByLibraryUUIDString(libraryUUIDString)/* // */ ;
+//                .map(ResponseEntity::ok)
+//                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     @DeleteMapping("{libraryUUIDString}")
     public Mono<Void> deleteProductByProductUUID(@PathVariable String libraryUUIDString){

@@ -9,8 +9,7 @@ import org.springframework.data.annotation.Id;
 public class Library {
 
     @Id
-    private int id;
-
+    private String id;
     private String libraryUUID;
     private String name;
     private String streetNumber;

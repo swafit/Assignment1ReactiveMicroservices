@@ -8,11 +8,5 @@ public interface LibraryService {
     Mono<LibraryDTO> insertLibrary(Mono<LibraryDTO> libraryDTOMono);
     Mono<LibraryDTO> updateLibrary(String libraryUUID, Mono<LibraryDTO> libraryDTOMono);
     Mono<LibraryDTO> getLibraryByLibraryUUIDString(String libraryUUIDString);
-
     Mono<Void> deleteLibrary(String productUUIDString);
-
-
-
-
-
 }
