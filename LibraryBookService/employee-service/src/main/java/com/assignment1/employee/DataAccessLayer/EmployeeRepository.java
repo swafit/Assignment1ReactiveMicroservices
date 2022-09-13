@@ -9,7 +9,7 @@ public interface EmployeeRepository extends ReactiveMongoRepository<Employee, St
 {
     Mono<Employee> findEmployeeByEmployeeUUID(String employeeUUIDString);
     Mono<Void> deleteEmployeeByEmployeeUUID(String employeeUUIDString);
-    boolean existsEmployeeByEmployeeId(String employeeUUIDString);
+    boolean existsEmployeeByEmployeeUUID(String employeeUUIDString);
     boolean existsEmployeeByLibraryUUID(String libraryUUIDString);
     Mono<Employee> findEmployeeByLibraryUUID(String libraryUUIDString);
 

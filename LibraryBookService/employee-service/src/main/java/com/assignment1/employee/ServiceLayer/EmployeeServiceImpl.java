@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Mono<EmployeeDTO> updateEmployee(String employeeUUIDString, Mono<EmployeeDTO> employeeDTOMono) {
-        if(!repository.existsEmployeeByEmployeeId(employeeUUIDString)) {
+        if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
                     System.out.println("NotFoundThrown");
                     throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
                     }
@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Mono<EmployeeDTO> getEmployeeByEmployeeUUIDString(String employeeUUIDString) {
-            if(!repository.existsEmployeeByEmployeeId(employeeUUIDString)) {
+            if(!repository.existsEmployeeByEmployeeUUID(employeeUUIDString)) {
                         System.out.println("NotFoundThrown");
                         throw new NotFoundException("Unknown EmployeeUUID provided: " + employeeUUIDString);
                         }

@@ -12,6 +12,7 @@ public class Book {
     @Id
     private String id;
     private String bookUUID;
+    private String libraryId;
     private String name;
     private String genre;
     private String ISBN;

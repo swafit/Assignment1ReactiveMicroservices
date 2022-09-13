@@ -26,18 +26,18 @@ public class BookController {
     }
 
     @PostMapping("{bookUUIDString}")
-    public Mono<ResponseEntity<BookDTO>> updateBookByBookUUIDString(@PathVariable String bookUUIDString,
+    public Mono</*ResponseEntity<*/BookDTO>/*>*/ updateBookByBookUUIDString(@PathVariable String bookUUIDString,
                                                                     @RequestBody Mono<BookDTO> bookDTOMono){
-        return bookService.updateBook(bookUUIDString, bookDTOMono)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+        return bookService.updateBook(bookUUIDString, bookDTOMono) /* // */;
+//                .map(ResponseEntity::ok)
+//                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("{libraryId}")
-    public Flux<ResponseEntity<BookDTO>> getBooksByLibraryID(@PathVariable String libraryId){
-        return bookService.getBooksByLibraryId(libraryId)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    @GetMapping("/library/{libraryId}")
+    public Flux/*<ResponseEntity*/<BookDTO>/*>*/ getBooksByLibraryID(@PathVariable String libraryId){
+        return bookService.getBooksByLibraryId(libraryId)  /* // */ ;
+//                .map(ResponseEntity::ok)
+//                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("{bookUUIDString}")

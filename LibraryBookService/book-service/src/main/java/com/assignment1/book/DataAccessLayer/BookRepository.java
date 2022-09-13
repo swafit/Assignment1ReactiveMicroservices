@@ -7,11 +7,11 @@ import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface BookRepository<FLux> extends ReactiveMongoRepository<Book, String> {
+public interface BookRepository extends ReactiveMongoRepository<Book, String> {
 
     Mono<Book> findBookByBookUUID(String bookUUIDString);
     Mono<Void> deleteBookByBookUUID(String bookUUIDString);
-    boolean existsBookByLibraryId(String libraryId);
+    //Mono<Boolean> existsBookByLibraryId(String libraryId);
     Flux<Book> findBooksByLibraryId(String libraryId);
 }
 

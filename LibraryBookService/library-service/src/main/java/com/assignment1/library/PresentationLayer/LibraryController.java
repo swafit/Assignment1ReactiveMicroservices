@@ -11,8 +11,11 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("library")
 public class LibraryController {
-    @Autowired
-    private LibraryService libraryService;
+    private final LibraryService libraryService;
+
+    public LibraryController(LibraryService libraryService) {
+        this.libraryService = libraryService;
+    }
 
     @GetMapping()
     public Flux<LibraryDTO> getAllLibraries(){
@@ -23,8 +26,7 @@ public class LibraryController {
         return libraryService.insertLibrary(libraryDTOMono);
     }
     @PutMapping("{libraryUUIDString}")
-    public Mono<ResponseEntity<LibraryDTO>> updateLibraryByLibraryUUIDString(@PathVariable String libraryUUIDString,
-                                                                             @RequestBody Mono<LibraryDTO> libraryDTOMono){
+    public Mono<ResponseEntity<LibraryDTO>> updateLibraryByLibraryUUIDString(@PathVariable String libraryUUIDString, @RequestBody Mono<LibraryDTO> libraryDTOMono){
         return libraryService.updateLibrary(libraryUUIDString, libraryDTOMono)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());

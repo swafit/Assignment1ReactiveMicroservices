@@ -45,7 +45,7 @@ public class BookServiceClient {
             try{
                 String url = baseUrl + "/books/" + libraryId;
                 //responseModel = restTemplate.getForObject(requestUrl, .class);
-                bookDTOFlux = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<Mono<BookDTO>>() {}).getBody();
+                bookDTOFlux = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<Flux<BookDTO>>() {}).getBody();
             }  catch (HttpClientErrorException e){
                 System.out.println("Not Found Caught");
                 throw handleHttpClientException(new HttpClientErrorException(e.getStatusCode()));

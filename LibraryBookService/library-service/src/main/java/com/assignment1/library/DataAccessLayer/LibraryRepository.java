@@ -9,5 +9,5 @@ public interface LibraryRepository extends ReactiveMongoRepository<Library, Stri
 
     Mono<Library> findLibraryByLibraryUUID(String libraryUUIDString);
     Mono<Void> deleteLibraryByLibraryUUID(String libraryUUIDString);
-    boolean existsLibraryByLibraryId(String libraryUUIDString);
+    boolean existsLibraryByLibraryUUID(String libraryUUIDString);
 }

@@ -30,10 +30,10 @@ public class BookServiceImpl implements BookService{
 
     @Override
         public Mono<BookDTO> updateBook(String bookUUIDString, Mono<BookDTO> bookDTOMono) {
-            if(!repository.existsBookByLibraryId(bookUUIDString)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
-                }
+//            if(!repository.existsBookByLibraryId(bookUUIDString)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+//                }
             return repository.findBookByBookUUID(bookUUIDString)
                     .flatMap(p -> bookDTOMono
                             .map(EntityDtoUtil::toEntity)
@@ -46,20 +46,20 @@ public class BookServiceImpl implements BookService{
 
         @Override
         public Flux<BookDTO> getBooksByLibraryId(String libraryId) {
-            if(!repository.existsBookByLibraryId(libraryId)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + libraryId);
-                }
+//            if(!repository.existsBookByLibraryId(libraryId)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + libraryId);
+//                }
             return repository.findBooksByLibraryId(libraryId)
                     .map(EntityDtoUtil::toDto);
         }
 
         @Override
         public Mono<Void> deleteBookByBookUUID(String bookUUIDString) {
-            if(!repository.existsBookByLibraryId(bookUUIDString)) {
-                System.out.println("NotFoundThrown");
-                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
-                }
+//            if(!repository.existsBookByLibraryId(bookUUIDString)) {
+//                System.out.println("NotFoundThrown");
+//                throw new NotFoundException("Unknown BookUUID provided: " + bookUUIDString);
+//                }
             return repository.deleteBookByBookUUID(bookUUIDString);
         }
     }

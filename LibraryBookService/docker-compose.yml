@@ -1,41 +1,51 @@
 services:
-  book:
+  books-service:
     build: book-service
-    hostname: book-service
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - mongo
-
-  library:
-    build: library-service
-    hostname: library-service
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - mongo1
-
-  employee:
-      build: employee-service
-      hostname: employee-service
-      environment:
-        - SPRING_PROFILES_ACTIVE=docker
-      depends_on:
-        - mongo2
-
-
-  api-gateway:
-    build: api-gateway
-    hostname: api-gateway
+    hostname: books-service
     ports:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - book
-      - library
-      - employee
+      - mongo
+#
 
+#  library:
+#    build: library-service
+#    hostname: library-service
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - mongo
+#    ports:
+#      - "8080:8080"
+
+
+
+#
+#  employee:
+#    build: employee-service
+#    hostname: employee-service
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - mongo2
+#    ports:
+#      - "8082:8082"
+
+
+#  api-gateway:
+#    build: api-gateway
+#    hostname: api-gateway
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - book
+#      - library
+#      - employee
+#
   mongo:
     image: mongo
     container_name: mongo
@@ -47,11 +57,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     #    volumes:
     #     - /C/Mine/mongoData:/data/db
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
-      retries: 5
-      interval: 15s
-      start_period: 30s
+#    healthcheck:
+#      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+#      retries: 5
+#      interval: 15s
+#      start_period: 30s
 
   mongo-express:
     image: mongo-express
@@ -65,69 +75,69 @@ services:
       - 8081:8081
     depends_on:
       - mongo
-      - book
+      - books-service
 
 
 
-  mongo1:
-    image: mongo
-    container_name: mongo
-    restart: always
-    ports:
-      - 27018:27018
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-    #    volumes:
-    #     - /C/Mine/mongoData:/data/db
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo localhost:27018/test --quiet
-      retries: 5
-      interval: 15s
-      start_period: 30s
+#  mongo:
+#    image: mongo
+#    container_name: mongo
+#    restart: always
+#    ports:
+#      - "27017:27017"
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: password
+#    #    volumes:
+#    #     - /C/Mine/mongoData:/data/db
+##    healthcheck:
+##      test: echo 'db.runCommand("ping").ok' | mongo localhost:27018/test --quiet
+##      retries: 5
+##      interval: 15s
+##      start_period: 30s
+#
+#  mongo-express1:
+#    image: mongo-express
+#    restart: always
+#    environment:
+#      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+#      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+#      - ME_CONFIG_MONGODB_SERVER=mongo
+#      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+#    ports:
+#      - "8084:8084"
+#    depends_on:
+#      - mongo
+#      - library
 
-  mongo-express1:
-    image: mongo-express1
-    restart: always
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-      - ME_CONFIG_MONGODB_SERVER=mongo
-      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-    ports:
-      - 8081:8081
-    depends_on:
-      - mongo1
-      - library
-
-
-  mongo2:
-    image: mongo
-    container_name: mongo
-    restart: always
-    ports:
-      - 27019:27019
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-    #    volumes:
-    #     - /C/Mine/mongoData:/data/db
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo localhost:27019/test --quiet
-      retries: 5
-      interval: 15s
-      start_period: 30s
-
-  mongo-express2:
-    image: mongo-express2
-    restart: always
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-      - ME_CONFIG_MONGODB_SERVER=mongo
-      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-    ports:
-      - 8081:8081
-    depends_on:
-      - mongo2
-      - employee
+#
+#  mongo2:
+#    image: mongo
+#    container_name: mongo2
+#    restart: always
+#    ports:
+#      - "27019:27019"
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: password
+#    #    volumes:
+#    #     - /C/Mine/mongoData:/data/db
+##    healthcheck:
+##      test: echo 'db.runCommand("ping").ok' | mongo localhost:27019/test --quiet
+##      retries: 5
+##      interval: 15s
+##      start_period: 30s
+#
+#  mongo-express2:
+#    image: mongo-express
+#    restart: always
+#    environment:
+#      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+#      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+#      - ME_CONFIG_MONGODB_SERVER=mongo
+#      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+#    ports:
+#      - "8085:8085"
+#    depends_on:
+#      - mongo2
+#      - employee
